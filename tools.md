@@ -45,3 +45,13 @@ sudo apt-get install dconf-editor
 dconf-editor
 # /org/gnome/settings-daemon/plugins/power/
 ```
+
+Use GoPro 9 Black as a Webcam on Ubuntu:
+```sh
+https://github.com/jschmid1/gopro_as_webcam_on_linux
+
+# Essentially:
+git clone https://github.com/jschmid1/gopro_as_webcam_on_linux
+sudo ./install.sh
+sudo gopro webcam
+```
