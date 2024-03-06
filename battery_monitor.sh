@@ -1,9 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Get the current battery percentage
 battery_level=`cat /sys/class/power_supply/CMB0/capacity`
 
-# Check if the battery level is 8%
-if [ "$battery_level" -eq 8 ]; then
-  systemctl hibernate
-fi
+case $battery_level in 11|10) pm-hibernate;; esac
