@@ -53,5 +53,8 @@ https://github.com/jschmid1/gopro_as_webcam_on_linux
 # Essentially:
 git clone https://github.com/jschmid1/gopro_as_webcam_on_linux
 sudo ./install.sh
+
+# Unplug GoPro
 sudo gopro webcam
+# Plug in GoPro (via USB-C or USB-A cable)
 ```
