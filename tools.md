@@ -49,3 +49,18 @@ crontab -e
 ```
 
 Mit `udev` gab es das Problem, dass das Ubuntusystem komplett sich ausschaltete, bei 10% oder weniger. Wir sind auf `cron` umgestiegen.
+
+This file
+```sh
+99-htpdate-sync
+```
+has some code to update the date, time, and time zone. This file can be placed (with given Linux permissions) into this following path. Then it will sync these three system components whenever the Internet connection is newly established:
+```sh
+/etc/NetworkManager/dispatcher.d/99-htpdate-sync
+```
+
+Add a line like
+```
+cd /work/sc122/sc122/dimitri_rusin/oll_onemax/
+```
+to `.profile`.
