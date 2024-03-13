@@ -1,0 +1,12 @@
+#!/usr/bin/env fish
+
+# Get the timezone using ipinfo.io and jq
+set TZ (/usr/bin/curl -s ipinfo.io | /home/dimitri/anaconda3/bin/jq -r '.timezone')
+
+# Set the timezone
+/usr/bin/timedatectl set-timezone $TZ
+
+# Synchronize time
+/usr/sbin/htpdate -s www.google.com
+
+/home/linuxbrew/.linuxbrew/bin/logger -t SyncingZoneDateTime "Just synced zone, date and time with Internet."
