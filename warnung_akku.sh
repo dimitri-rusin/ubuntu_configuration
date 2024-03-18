@@ -2,11 +2,14 @@
 
 export DISPLAY=:0
 
-# Hole den aktuellen Batteriestand
+# Get the current battery level
 batterystand=$(upower -i /org/freedesktop/UPower/devices/battery_CMB0 | grep percentage | awk '{print $2}' | sed 's/%//')
 
-# Überprüfe, ob der Batteriestand unter 15% liegt
-if [ $batterystand -lt 15 ]; then
+# Get the current battery status (Charging/Discharging)
+battery_status=$(upower -i /org/freedesktop/UPower/devices/battery_CMB0 | grep state | awk '{print $2}')
+
+# Check if the battery level is below 20% and the battery is discharging
+if [ $batterystand -lt 20 ] && [ "$battery_status" = "discharging" ]; then
 
   SCREEN_DIMENSIONS=$(xdpyinfo | grep 'dimensions:' | awk '{print $2}')
   if [ -z "$SCREEN_DIMENSIONS" ]; then
@@ -24,7 +27,6 @@ if [ $batterystand -lt 15 ]; then
   export GDK_DPI_SCALE=8
 
   yad --width=$WINDOW_WIDTH --height=$WINDOW_HEIGHT \
-  --title="Battery almost empty." \
   --button="Plugin power cord.:0" --modal --fixed --center \
   --undecorated --on-top \
   --image="$CUSTOM_ICON_PATH" \

@@ -40,11 +40,12 @@ sudo gopro webcam
 # Plug in GoPro (via USB-C or USB-A cable)
 ```
 
+Jede 1 Minute checken [wichtig, denn Akku geht schnell leer, während Zoom-Meeting]:
 ```sh
 crontab -e
 
 # ===============================================
-*/10 * * * * /home/dimitri/code/ubuntu_configuration/warnung_akku.sh
+*/1 * * * * /home/dimitri/code/ubuntu_configuration/warnung_akku.sh
 # ===============================================
 ```
 
@@ -64,3 +65,22 @@ Add a line like
 cd /work/sc122/sc122/dimitri_rusin/oll_onemax/
 ```
 to `.profile`.
+
+
+
+To sign a .pdf document by inserting a picture into a file, go to:
+```sh
+https://www.adobe.com/acrobat/online/sign-pdf.html
+```
+
+
+In the .conda.yaml file, you can put
+```sh
+dependencies:
+  - python==3.9.18
+  - pip==23.3.1
+variables:
+  TEST_VAR: 42
+```
+This will create an environment variable, that is bound to the activation of the conda environment. If you want to have a variable, that is the same across all runs within the same environment.
+
