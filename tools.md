@@ -84,3 +84,12 @@ variables:
 ```
 This will create an environment variable, that is bound to the activation of the conda environment. If you want to have a variable, that is the same across all runs within the same environment.
 
+Find password of any known WiFi:
+```sh
+sudo cat /etc/NetworkManager/system-connections/*
+```
+
+Just currently connected WiFi's password (using fish):
+```sh
+set ssid (nmcli -t -f active,ssid dev wifi | string match -r '^yes.*' | string split ':' -f 2); and echo $ssid: (sudo cat /etc/NetworkManager/system-connections/$ssid.nmconnection | string match 'psk=*' | string split '=' -f 2)
+```
