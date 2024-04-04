@@ -93,3 +93,9 @@ Just currently connected WiFi's password (using fish):
 ```sh
 set ssid (nmcli -t -f active,ssid dev wifi | string match -r '^yes.*' | string split ':' -f 2); and echo $ssid: (sudo cat /etc/NetworkManager/system-connections/$ssid.nmconnection | string match 'psk=*' | string split '=' -f 2)
 ```
+
+Translate .md into .pdf:
+Translate a Markdown text file into a nice-looking document or PDF file:
+```sh
+pandoc demande.md -o demande.pdf
+```
