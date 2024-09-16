@@ -60,6 +60,18 @@ has some code to update the date, time, and time zone. This file can be placed (
 /etc/NetworkManager/dispatcher.d/99-htpdate-sync
 ```
 
+With regards to `/etc/NetworkManager/dispatcher.d/99-htpdate-sync`, we might get errors like:
+```sh
+req:1 'down' [wlp0s20f3]: find-scripts: Cannot execute '/etc/NetworkManager/dispatcher.d/99-htpdate-sync': not owned by root.
+```
+
+If you want the `/etc/NetworkManager/dispatcher.d/99-htpdate-sync` script to run at WiFi connection establishment, do:
+```sh
+sudo chown root:root /etc/NetworkManager/dispatcher.d/99-htpdate-sync
+sudo systemctl start NetworkManager-dispatcher.service
+sudo systemctl status NetworkManager-dispatcher.service
+```
+
 Add a line like
 ```
 cd /work/sc122/sc122/dimitri_rusin/oll_onemax/
