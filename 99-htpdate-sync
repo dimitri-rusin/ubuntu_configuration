@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
 # Get the timezone using ipinfo.io and jq
-set TZ (/usr/bin/curl -s ipinfo.io | /home/dimitri/anaconda3/bin/jq -r '.timezone')
+set TZ (/usr/bin/curl -s ipinfo.io | /snap/bin/jq -r '.timezone')
 
 # Set the timezone
 /usr/bin/timedatectl set-timezone $TZ

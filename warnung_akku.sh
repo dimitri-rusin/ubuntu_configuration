@@ -9,7 +9,7 @@ batterystand=$(upower -i /org/freedesktop/UPower/devices/battery_CMB0 | grep per
 battery_status=$(upower -i /org/freedesktop/UPower/devices/battery_CMB0 | grep state | awk '{print $2}')
 
 # Check if the battery level is below 25% and the battery is discharging
-if [ $batterystand -lt 25 ] && [ "$battery_status" = "discharging" ]; then
+if [ $batterystand -lt 5 ] && [ "$battery_status" = "discharging" ]; then
 
   SCREEN_DIMENSIONS=$(xdpyinfo | grep 'dimensions:' | awk '{print $2}')
   if [ -z "$SCREEN_DIMENSIONS" ]; then

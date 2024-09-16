@@ -64,13 +64,26 @@ Add a line like
 ```
 cd /work/sc122/sc122/dimitri_rusin/oll_onemax/
 ```
-to `.profile`.
+to `.profile`. Not `.bashrc`.
 
 
 
 To sign a .pdf document by inserting a picture into a file, go to:
 ```sh
 https://www.adobe.com/acrobat/online/sign-pdf.html
+```
+
+To edit a pdf:
+```sh
+# When you insert typed text:
+# To prevent the last few non-space characters not being visible upon downloading,
+# add trailing space characters.
+https://acrobat.adobe.com/link/acrobat/edit-pdf
+```
+
+Or go here. Click "Fill & Sign":
+```
+https://acrobat.adobe.com/link/tools/?group=group-sign
 ```
 
 
@@ -98,4 +111,169 @@ Translate .md into .pdf:
 Translate a Markdown text file into a nice-looking document or PDF file:
 ```sh
 pandoc demande.md -o demande.pdf
+```
+
+Download YouTube.
+```sh
+$HOME/Videos/youtube-downloader/yt-dlp_linux -x --audio-format mp3 -o "./piper/%(title)s.%(ext)s" "https://www.youtube.com/watch?v=74Uc6gOdq9U"
+```
+For more code for downloading from YouTube, look at:
+```sh
+/home/dimitri/code/playlists/.deploy/workstory.md
+```
+
+
+Monitor bandwidth usage.
+```sh
+iftop
+```
+
+Shell configuration:
+```sh
+# Shell configuration file path:
+subl ~/.config/fish/config.fish
+
+# Contents:
+abbr --add e 'conda activate .deploy/conda_environment/'
+abbr --add r './.deploy/RUN'
+abbr --add b './.deploy/BUILD'
+abbr --add s 'source $HOME/code/deploy/python_setup.fish'
+abbr --add upgrade 'sudo apt update &&
+  sudo apt upgrade -y &&
+  sudo apt full-upgrade -y &&
+  sudo apt autoremove -y &&
+  sudo apt autoclean &&
+  sudo apt clean
+'
+
+function list_by_size
+  sudo du -sh {,.}* | sort -rh
+end
+
+alias showspaces 'sed -e "s/ /␣/g" -e "s/\$/\$/"'
+```
+
+Cut video:
+Get a frame:
+Concatenate two videos
+```sh
+ffmpeg -ss 00:00:00 -to 00:00:34 -i GH010693.MP4 -c copy output.mp4
+ffmpeg -ss 00:00:04.500 -i video.mp4 -frames:v 1 frame.png
+ffmpeg -f concat -safe 0 -i files.txt -c copy combined.mp4
+```
+
+From concatenation, files.txt has the format:
+```sh
+file '/home/dimitri/Videos/My trip to Seoul.mp4'
+file '/home/dimitri/Videos/My trip to Seoul [2_2].mp4'
+````
+
+Find heaviest folders or files:
+```sh
+sudo du -ah --max-depth=3 | sort -rh | head -n 10
+```
+
+Modify `.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap`:
+```json
+[
+  { "keys": ["ctrl+space"], "command": "insert", "args": {"characters": "\n"} },
+  { "keys": ["ctrl+alt+a"], "command": "unindent" },
+  { "keys": ["ctrl+alt+s"], "command": "indent" },
+  { "keys": ["alt+w"], "command": "jump_back" },
+  { "keys": ["alt+shift+w"], "command": "jump_forward" },
+  { "keys": ["ctrl+z"], "command": "soft_undo" },
+  { "keys": ["ctrl+shift+z"], "command": "soft_redo" },
+  { "keys": ["ctrl+u"], "command": "undo" },
+  { "keys": ["ctrl+shift+u"], "command": "redo" },
+]
+```
+
+`.config/sublime-text-3/Packages/User/Preferences.sublime-settings`
+```json
+  "ensure_newline_at_eof_on_save": true
+```
+
+Synology. In the browser, go to:
+```
+quickconnect.to/maulstein
+```
+
+Brave search engines and site search
+```
+Google Maps
+map
+https://www.google.com/maps/search/?api=1&query=%s
+```
+
+Set fish as a standard shell:
+```sh
+chsh -s /usr/bin/fish
+```
+
+How to save password on MBR record:
+```sh
+printf "%-384s" "email: XXX password: YYY recovery_codes: ZZZ" | sudo dd of=/dev/sda bs=384 count=1 seek=0
+sudo dd if=/dev/sda bs=384 count=1 | hexdump -v -e '1/1 "%c"'
+```
+
+Get all files modified at most 24 hours ago:
+```sh
+find /var/log/apache2 -mtime 1
+
+# -mtime n
+# File's data was last modified n*24 hours ago. See the comments for -atime to understand how rounding affects the interpretation of file modification times.
+
+-mmin n
+    File's data was last modified n minutes ago.
+```
+
+List files only of size measured in Gigabyte
+```sh
+sudo du -hd1 . | sed -nE '/^[0-9]+(,[0-9]+)?G/p'
+```
+
+```sh
+#!/usr/bin/env fish
+
+# find . ! -executable -exec chmod 660 {} \+
+# find . -executable -exec chmod 770 {} \+
+
+find . ! -executable -exec chmod 664 {} \+
+find . -executable -exec chmod 775 {} \+
+
+# Put up an extra layer of system security on the cryptographic keys,
+# that are stored using the system.
+chmod 600 ~/.ssh/*
+ll ~/.ssh/*
+
+```
+
+To list all users:
+```sh
+cut -d: -f1 /etc/passwd
+```
+
+To list all groups:
+```sh
+cut -d: -f1 /etc/group
+```
+
+To remove entries from the Sublime Text 4 Quick Switch Project list, do:
+```sh
+Go to: Project -> Open Recent -> Clear Items
+```
+
+Create a script for establishing a Python environment from the Nautilus window:
+```sh
+# Ctrl+H: Show hidden files.
+# New Document: Select .conda.yaml or .INSTALL or .gitignore to create new files in the current working directory.
+```
+
+
+https://slides.com/
+```
+JavaScript slide engine
+go here to make slides
+go here to prepare a presentation
+Hakim El Hattab
 ```
