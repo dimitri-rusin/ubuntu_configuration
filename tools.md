@@ -72,6 +72,11 @@ sudo systemctl start NetworkManager-dispatcher.service
 sudo systemctl status NetworkManager-dispatcher.service
 ```
 
+The root should own the file. So, we should always have:
+```sh
+lrwxrwxrwx 1 root root 55 Sep 16 23:13 /etc/NetworkManager/dispatcher.d/99-htpdate-sync -> /home/dimitri/code/ubuntu_configuration/99-htpdate-sync*
+```
+
 Add a line like
 ```
 cd /work/sc122/sc122/dimitri_rusin/oll_onemax/
