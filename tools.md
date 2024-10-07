@@ -84,6 +84,10 @@ cd /work/sc122/sc122/dimitri_rusin/oll_onemax/
 to `.profile`. Not `.bashrc`.
 
 
+Change size of PDF:
+```sh
+pdfjam screen.pdf --paper a4paper --outfile resized_screen.pdf
+```
 
 To sign a .pdf document by inserting a picture into a file, go to:
 ```sh
@@ -294,3 +298,17 @@ go here to make slides
 go here to prepare a presentation
 Hakim El Hattab
 ```
+
+Nice Sublime Text packages:
+```
+Text Pastry: inserting consecutive numbers like 1, 2, 3
+```
+
+Find the MAC address of reMarkable tablet:
+```sh
+MAC: 10:2C:6B:E0:97:A2
+Settings -> About -> Copyrights and Licenses
+```
+
+
+
