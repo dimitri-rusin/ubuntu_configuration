@@ -123,6 +123,11 @@ Find password of any known WiFi:
 sudo cat /etc/NetworkManager/system-connections/*
 ```
 
+Restart WiFi (in case, weirdly does not connect):
+```sh
+sudo systemctl restart NetworkManager
+```
+
 Just currently connected WiFi's password (using fish):
 ```sh
 set ssid (nmcli -t -f active,ssid dev wifi | string match -r '^yes.*' | string split ':' -f 2); and echo $ssid: (sudo cat /etc/NetworkManager/system-connections/$ssid.nmconnection | string match 'psk=*' | string split '=' -f 2)
@@ -312,3 +317,74 @@ Settings -> About -> Copyrights and Licenses
 
 
 
+To connect to eduroam, check:
+```
+./eduroam/
+
+Bei Zertifikat: nicht bestätigen
+DHCP (nicht statisch)
+```
+The ca_cert "/home/dimitri/.config/cat_installer/ca.pem" is `./ca.pem`.
+
+To connect to eduroam on Ubuntu:
+```
+Wi-Fi security: WPA & WPA2 Enterprise
+Authentication: Protected EAP (PEAP)
+Anonymous identity: anonymous@manchester.ac.uk
+Domain: radius.its.manchester.ac.uk
+CA certificate: No CA certificate is required
+PEAP version: Automatic
+Inner authentication: MSCHAPv2
+Username: p84567dr@manchester.ac.uk
+Password: Wgm1XgwgJUxXzP2rtUys%2GeNnExbcvTYJhjHW8AdyystpyRfx8rqyepmqrautWM
+<After creating the eduroam configuration, on Identity tab, select something from the dropdown menu of MAC Address>
+
+
+network={
+  ssid="eduroam"
+  key_mgmt=WPA-EAP
+  pairwise=CCMP
+  group=CCMP TKIP
+  eap=PEAP
+  ca_cert="/home/dimitri/.config/cat_installer/ca.pem"
+  identity="p84567dr@manchester.ac.uk"
+  altsubject_match="DNS:lily.its.manchester.ac.uk;DNS:radius.its.manchester.ac.uk;DNS:willow.its.manchester.ac.uk"
+  phase2="auth=MSCHAPV2"
+  password="Wsss"
+  anonymous_identity="anonymous@manchester.ac.uk"
+}
+
+[connection]
+id=eduroam
+uuid=145403ea-81a1-4491-94ae-95de1d332019
+type=wifi
+interface-name=wlp0s20f3
+permissions=
+
+[wifi]
+mac-address-blacklist=
+mode=infrastructure
+ssid=eduroam
+
+[wifi-security]
+key-mgmt=wpa-eap
+
+[802-1x]
+anonymous-identity=anonymous@manchester.ac.uk
+ca-cert=/home/dimitri/.config/cat_installer/ca.pem
+eap=peap;
+identity=p84567dr@manchester.ac.uk
+password=Wgm1XgwgJUxXzP2rtUys%2GeNnExbcvTYJhjHW8AdyystpyRfx8rqyepmqrautWM
+phase2-auth=mschapv2
+
+[ipv4]
+dns-search=
+method=auto
+
+[ipv6]
+addr-gen-mode=stable-privacy
+dns-search=
+method=auto
+
+[proxy]
+```
